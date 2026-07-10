@@ -17,7 +17,7 @@ const projects = (await getCollection('projects')).sort(
 					href={`/projects/${project.id}`}
 					data-reveal
 					style={`transition-delay: ${i * 60}ms`}
-					class="card block rounded-lg border border-slate-200 p-5 hover:border-slate-400"
+					class="card block p-5"
 				>
 					<h2 class="font-medium text-lg mb-1">{project.data.title}</h2>
 					<p class="text-sm text-slate-500 mb-3">{project.data.description}</p>

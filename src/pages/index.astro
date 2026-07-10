@@ -7,8 +7,8 @@ const featuredProjects = projects
 	.filter((project) => project.data.featured)
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const email = 'your-email@example.com';
-const linkedinUrl = 'https://linkedin.com/in/your-profile';
+const email = 'finleybatesmith@outlook.com';
+const linkedinUrl = 'https://linkedin.com/in/finley-bate-smith';
 ---
 
 <Layout title="Home">
@@ -20,7 +20,7 @@ const linkedinUrl = 'https://linkedin.com/in/your-profile';
 		<div data-reveal style="transition-delay: 140ms" class="mt-8 flex gap-4">
 			<a
 				href="/projects"
-				class="btn rounded-full bg-sky-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-sky-500"
+				class="btn btn-glass rounded-full px-5 py-2.5 text-sm font-medium text-white"
 			>
 				View my projects
 			</a>
@@ -53,9 +53,9 @@ const linkedinUrl = 'https://linkedin.com/in/your-profile';
 	<section class="mx-auto max-w-4xl px-6 py-16 border-t border-slate-200">
 		<h2 class="text-2xl font-semibold mb-4">About</h2>
 		<p class="max-w-2xl text-slate-600">
-			A couple of paragraphs about your background, what you're currently working on or learning,
-			and what kind of opportunities or projects you're interested in. See the
-			<a href="/about" class="text-sky-600 hover:text-sky-700"> About page</a> for more.
+			I am entering my third year studying mechanical engineering at Queen's University with experience on the FSAE team. 
+			Currently at the Royal Military College of Canada doing research, building and testing different velocity measurement systems.
+			<a href="/about" class="text-sky-600 hover:text-sky-700"> see more </a>
 		</p>
 	</section>
 
@@ -70,7 +70,7 @@ const linkedinUrl = 'https://linkedin.com/in/your-profile';
 					href={`/projects/${project.id}`}
 					data-reveal
 					style={`transition-delay: ${i * 60}ms`}
-					class="card block rounded-lg border border-slate-200 p-5 hover:border-slate-400"
+					class="card block p-5"
 				>
 					<h3 class="font-medium text-lg mb-1">{project.data.title}</h3>
 					<p class="text-sm text-slate-500">{project.data.description}</p>

@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const email = 'finleybatesmith@outlook.com';
+const linkedinUrl = 'https://linkedin.com/in/finley-bate-smith';
 ---
 
 <Layout title="About">
@@ -8,24 +11,34 @@ import Layout from '../layouts/Layout.astro';
 
 		<div data-reveal style="transition-delay: 70ms" class="max-w-2xl space-y-6 text-slate-600">
 			<p>
-				Replace this with your background: where you studied or trained, how you got into
-				software, and what you focus on now.
+				I am entering my third year studying mechanical engineering at Queen's University with experience 
+				on the FSAE team. Currently at the Royal Military College of Canada doing summer research, building 
+				and testing different velocity measurement systems. 
 			</p>
 			<p>
-				Add details about your interests, the kinds of problems you enjoy solving, and any
-				notable experience or achievements worth highlighting.
+				Outside of engineering, I enjoy driving my car whenever it is not in pieces in my garage, following motorsports,
+				playing golf and running.
 			</p>
 		</div>
 
 		<div data-reveal style="transition-delay: 140ms" class="mt-12">
-			<h2 class="text-xl font-semibold mb-4">Skills</h2>
-			<ul class="flex flex-wrap gap-2">
-				{[ 'Solidworks', 'CATIA V5', 'Python', 'C'].map((skill) => (
-					<li class="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-600 transition-colors hover:border-slate-400">
-						{skill}
-					</li>
-				))}
-			</ul>
+			<h2 class="text-xl font-semibold mb-4">Get in touch</h2>
+			<div class="flex flex-col items-start gap-4">
+				<a
+					href={`mailto:${email}`}
+					class="btn btn-glass btn-glass-light inline-block rounded-full border border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-700"
+				>
+					Email
+				</a>
+				<a
+					href={linkedinUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="btn btn-glass btn-glass-linkedin inline-block rounded-full px-5 py-2.5 text-sm font-medium text-white"
+				>
+					LinkedIn
+				</a>
+			</div>
 		</div>
 	</section>
 </Layout>

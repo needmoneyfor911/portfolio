@@ -19,13 +19,14 @@
 	border-radius: 2px;
 }
 
-/* Shared press-feedback + hover-lift for anything clickable (buttons, cards). */
+/* Shared press-feedback for anything clickable (buttons, cards). */
 .btn,
 .card {
 	transition:
 		transform var(--duration-fast) var(--ease-out),
 		background-color var(--duration-base) var(--ease-out),
-		border-color var(--duration-base) var(--ease-out);
+		border-color var(--duration-base) var(--ease-out),
+		box-shadow var(--duration-base) var(--ease-out);
 }
 
 .btn:active {
@@ -42,28 +43,102 @@
 	transform: scale(0.92);
 }
 
-@media (hover: hover) and (pointer: fine) {
-	.card:hover {
-		transform: translateY(-2px);
-	}
-}
+/* --- Liquid Glass material ---
+   A translucent surface that reads as physical glass: a bright inset
+   highlight along the top edge (where light catches the surface), a soft
+   shadow beneath it (so it looks like it's sitting above the page, not
+   printed on it), and blur+saturate so anything that scrolls underneath
+   shows through softened and color-boosted. Used on the nav, the primary
+   button, and project cards. */
 
-/* Sticky translucent nav "material" -- content scrolls underneath a blurred
-   glass layer instead of a solid bar. The hairline only appears once the
-   page has actually scrolled (toggled by the script in Layout.astro). */
 .site-header {
 	position: sticky;
 	top: 0;
 	z-index: 50;
-	background: rgba(255, 255, 255, 0.7);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.55));
 	backdrop-filter: blur(20px) saturate(180%);
 	-webkit-backdrop-filter: blur(20px) saturate(180%);
 	border-bottom: 1px solid transparent;
-	transition: border-color var(--duration-base) var(--ease-out);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+	transition:
+		border-color var(--duration-base) var(--ease-out),
+		box-shadow var(--duration-base) var(--ease-out);
 }
 
+/* Once scrolled, the material reads as "thicker" -- a page's worth of
+   content is now passing underneath it, so it earns a stronger shadow and a
+   visible edge instead of floating with no separation from the page. */
 .site-header[data-scrolled='true'] {
-	border-bottom-color: rgba(15, 23, 42, 0.08);
+	border-bottom-color: rgba(15, 23, 42, 0.06);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.9),
+		0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* .btn-glass reads its colors from custom properties, so a color variant is
+   just a class that overrides them -- the material (gradient direction,
+   specular highlight, blur, shadow shape) stays identical everywhere. */
+.btn-glass {
+	--glass-from: var(--color-sky-500);
+	--glass-to: var(--color-sky-600);
+	--glass-hover-from: var(--color-sky-400);
+	--glass-hover-to: var(--color-sky-500);
+	--glass-glow: rgba(2, 132, 199, 0.35);
+
+	position: relative;
+	background: linear-gradient(180deg, var(--glass-from), var(--glass-to));
+	backdrop-filter: blur(12px) saturate(180%);
+	-webkit-backdrop-filter: blur(12px) saturate(180%);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.5),
+		0 4px 14px var(--glass-glow);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.btn-glass:hover {
+		background: linear-gradient(180deg, var(--glass-hover-from), var(--glass-hover-to));
+	}
+}
+
+/* LinkedIn's brand blue. */
+.btn-glass-linkedin {
+	--glass-from: #0a66c2;
+	--glass-to: #0a5cae;
+	--glass-hover-from: #1974d2;
+	--glass-hover-to: #0a66c2;
+	--glass-glow: rgba(10, 102, 194, 0.35);
+}
+
+/* Light neutral surface for email -- dark text instead of white, and a
+   soft neutral shadow instead of a colored glow. */
+.btn-glass-light {
+	--glass-from: #ffffff;
+	--glass-to: var(--color-slate-100);
+	--glass-hover-from: #ffffff;
+	--glass-hover-to: #ffffff;
+	--glass-glow: rgba(15, 23, 42, 0.12);
+}
+
+.card {
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4));
+	backdrop-filter: blur(16px) saturate(180%);
+	-webkit-backdrop-filter: blur(16px) saturate(180%);
+	border: 1px solid rgba(255, 255, 255, 0.7);
+	border-radius: 1rem;
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.8),
+		0 1px 2px rgba(15, 23, 42, 0.04),
+		0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.card:hover {
+		transform: translateY(-2px);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.9),
+			0 1px 2px rgba(15, 23, 42, 0.05),
+			0 16px 32px rgba(15, 23, 42, 0.1);
+	}
 }
 
 /* Generic scroll-reveal: fade + rise, applied once per element and never
