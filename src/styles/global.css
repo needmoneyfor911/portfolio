@@ -1,19 +1,131 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+:root {
+	/* Custom easing curves. The built-in CSS ones (ease, ease-in-out) are too
+	   weak to feel intentional -- these are stronger, more "designed" variants. */
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+	--duration-fast: 150ms;
+	--duration-base: 220ms;
+	--duration-slow: 500ms;
+}
+
+/* Keyboard-visible focus ring. */
+:focus-visible {
+	outline: 2px solid var(--color-sky-600);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* Shared press-feedback + hover-lift for anything clickable (buttons, cards). */
+.btn,
+.card {
+	transition:
+		transform var(--duration-fast) var(--ease-out),
+		background-color var(--duration-base) var(--ease-out),
+		border-color var(--duration-base) var(--ease-out);
+}
+
+.btn:active {
+	transform: scale(0.97);
+}
+
+.icon-link {
+	transition:
+		color var(--duration-base) var(--ease-out),
+		transform var(--duration-fast) var(--ease-out);
+}
+
+.icon-link:active {
+	transform: scale(0.92);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.card:hover {
+		transform: translateY(-2px);
+	}
+}
+
+/* Sticky translucent nav "material" -- content scrolls underneath a blurred
+   glass layer instead of a solid bar. The hairline only appears once the
+   page has actually scrolled (toggled by the script in Layout.astro). */
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	border-bottom: 1px solid transparent;
+	transition: border-color var(--duration-base) var(--ease-out);
+}
+
+.site-header[data-scrolled='true'] {
+	border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+/* Generic scroll-reveal: fade + rise, applied once per element and never
+   re-triggered. Stagger delays are set inline per-element (see pages).
+
+   Elements are ONLY hidden once the script in Layout.astro has confirmed
+   an IntersectionObserver is watching them (it adds .js-reveal-ready to
+   <html>). If JS fails to load, errors, or is disabled, this class is
+   never added, so everything just renders visible via its normal markup --
+   content can never get stuck invisible. */
+.js-reveal-ready [data-reveal] {
+	opacity: 0;
+	transform: translateY(8px);
+	transition:
+		opacity var(--duration-slow) var(--ease-out),
+		transform var(--duration-slow) var(--ease-out);
+}
+
+[data-reveal].is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
 .prose figure {
 	margin: 2rem 0;
 }
 
 .prose figure img {
 	border-radius: 0.5rem;
-	border: 1px solid var(--color-slate-800);
+	border: 1px solid var(--color-slate-200);
 	margin-bottom: 0;
+}
+
+/* Reveal photos with a clip-path wipe instead of a plain fade -- it reads as
+   the image being "drawn in" rather than just appearing. Same JS-confirmed
+   gating as [data-reveal] above: only hidden once .js-reveal-ready is set. */
+.js-reveal-ready .prose figure img {
+	clip-path: inset(0 0 100% 0);
+	transition: clip-path var(--duration-slow) var(--ease-out);
+}
+
+.prose figure.is-visible img {
+	clip-path: inset(0 0 0 0);
 }
 
 .prose figure figcaption {
 	margin-top: 0.5rem;
 	text-align: center;
 	font-size: 0.875rem;
-	color: var(--color-slate-400);
+	color: var(--color-slate-500);
+}
+
+/* Reduced motion: keep color transitions (they aid comprehension) but drop
+   all movement on hover/press/nav effects. The scroll-reveal system needs no
+   entry here -- the script never adds .js-reveal-ready when this is set, so
+   [data-reveal] and figure images simply never enter a hidden state. */
+@media (prefers-reduced-motion: reduce) {
+	.site-header,
+	.card,
+	.btn,
+	.icon-link {
+		transition-duration: 1ms !important;
+		transform: none !important;
+	}
 }

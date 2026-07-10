@@ -16,27 +16,27 @@ const { Content } = await render(project);
 
 <Layout title={project.data.title} description={project.data.description}>
 	<article class="mx-auto max-w-3xl px-6 py-20">
-		<a href="/projects" class="text-sm text-indigo-400 hover:text-indigo-300">&larr; All projects</a>
+		<a href="/projects" class="text-sm text-sky-600 hover:text-sky-700">&larr; All projects</a>
 
-		<h1 class="text-4xl font-bold tracking-tight mt-6 mb-3">{project.data.title}</h1>
-		<p class="text-slate-400 mb-6">{project.data.description}</p>
+		<h1 data-reveal class="text-4xl font-bold tracking-tight mt-6 mb-3">{project.data.title}</h1>
+		<p data-reveal style="transition-delay: 60ms" class="text-slate-500 mb-6">{project.data.description}</p>
 
-		<ul class="flex flex-wrap gap-2 mb-4">
+		<ul data-reveal style="transition-delay: 110ms" class="flex flex-wrap gap-2 mb-4">
 			{project.data.tags.map((tag) => (
-				<li class="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs text-slate-300">{tag}</li>
+				<li class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs text-slate-600">{tag}</li>
 			))}
 		</ul>
 
-		<div class="flex gap-4 mb-10 text-sm">
+		<div data-reveal style="transition-delay: 160ms" class="flex gap-4 mb-10 text-sm">
 			{project.data.repoUrl && (
-				<a href={project.data.repoUrl} class="text-indigo-400 hover:text-indigo-300">Source &rarr;</a>
+				<a href={project.data.repoUrl} class="btn inline-block text-sky-600 hover:text-sky-700">Source &rarr;</a>
 			)}
 			{project.data.liveUrl && (
-				<a href={project.data.liveUrl} class="text-indigo-400 hover:text-indigo-300">Live site &rarr;</a>
+				<a href={project.data.liveUrl} class="btn inline-block text-sky-600 hover:text-sky-700">Live site &rarr;</a>
 			)}
 		</div>
 
-		<div class="prose prose-invert max-w-none">
+		<div class="prose max-w-none">
 			<Content />
 		</div>
 	</article>

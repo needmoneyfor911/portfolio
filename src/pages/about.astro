@@ -4,9 +4,9 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="About">
 	<section class="mx-auto max-w-4xl px-6 py-20">
-		<h1 class="text-4xl font-bold tracking-tight mb-8">About</h1>
+		<h1 data-reveal class="text-4xl font-bold tracking-tight mb-8">About</h1>
 
-		<div class="max-w-2xl space-y-6 text-slate-300">
+		<div data-reveal style="transition-delay: 70ms" class="max-w-2xl space-y-6 text-slate-600">
 			<p>
 				Replace this with your background: where you studied or trained, how you got into
 				software, and what you focus on now.
@@ -17,11 +17,11 @@ import Layout from '../layouts/Layout.astro';
 			</p>
 		</div>
 
-		<div class="mt-12">
+		<div data-reveal style="transition-delay: 140ms" class="mt-12">
 			<h2 class="text-xl font-semibold mb-4">Skills</h2>
 			<ul class="flex flex-wrap gap-2">
 				{[ 'Solidworks', 'CATIA V5', 'Python', 'C'].map((skill) => (
-					<li class="rounded-full border border-slate-700 px-3 py-1 text-sm text-slate-300">
+					<li class="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-600 transition-colors hover:border-slate-400">
 						{skill}
 					</li>
 				))}
