@@ -3,7 +3,6 @@ title: E36 Cup Holders
 description: Cupholders for a 1996 BMW 328i
 date: 2025-05-08
 tags: [Solidworks, 3D Printing]
-liveUrl: https://example.com
 featured: false
 ---
 
