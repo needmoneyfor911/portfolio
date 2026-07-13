@@ -6,7 +6,7 @@ tags: [Solidworks, 3D Printing]
 featured: false
 ---
 
-A major flaw on E36's is the absence of cupholders. Instead, BMW preferred to having ashtray's available to the passengers. There are a few aftermarket options for cupholders, ranging from 75$ to 150$ USD. I decided to take matters into my own hands, to design and fabricate my own. My objectives with the design was holding the average drink size, looking OEM / fitting interior aesthetic, without needing to drill or cut any part, making it fully reversible.
+A major flaw on E36's is the absence of cupholders. Instead, BMW preferred to having ashtray's available to the passengers. I decided to take on a personal project od designing and fabricating my own. My objectives with the design was holding the average drink size, looking OEM / fitting interior aesthetic, without needing to drill or cut any part, making it fully reversible.
 
 <figure>
 	<img src="/images/drinks.jpeg" alt="Finished cupholder installed in the E36 console holding drinks" />
