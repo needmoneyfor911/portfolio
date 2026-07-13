@@ -18,7 +18,8 @@ const { Content } = await render(project);
 	<article class="mx-auto max-w-3xl px-6 py-20">
 		<a href="/projects" class="text-sm text-sky-600 hover:text-sky-700">&larr; All projects</a>
 
-		<h1 data-reveal class="text-4xl font-bold tracking-tight mt-6 mb-3">{project.data.title}</h1>
+		<p data-reveal class="text-xs font-semibold uppercase tracking-wide text-sky-600 mt-6">{project.data.category}</p>
+		<h1 data-reveal class="text-4xl font-bold tracking-tight mt-1 mb-3">{project.data.title}</h1>
 		<p data-reveal style="transition-delay: 60ms" class="text-slate-500 mb-6">{project.data.description}</p>
 
 		<ul data-reveal style="transition-delay: 110ms" class="flex flex-wrap gap-2 mb-4">

@@ -7,6 +7,7 @@ const projects = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		date: z.coerce.date(),
+		category: z.enum(['Personal', 'FSAE', 'Work']),
 		tags: z.array(z.string()).default([]),
 		repoUrl: z.string().url().optional(),
 		liveUrl: z.string().url().optional(),
