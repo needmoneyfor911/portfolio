@@ -4,7 +4,7 @@ description: Inductive coil system to measure projectile velocity from induced v
 date: 2026-07-12
 category: Work
 tags: [Solidworks, 3D Printing, Python, C, Arduino]
-featured: true
+featured: false
 ---
 
 Work In Progress...
