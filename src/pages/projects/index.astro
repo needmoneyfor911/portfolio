@@ -2,9 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const projects = (await getCollection('projects')).sort(
+const allProjects = (await getCollection('projects')).sort(
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+const projects = allProjects.filter((project) => !project.data.minor);
+const minorProjects = allProjects.filter((project) => project.data.minor);
 ---
 
 <Layout title="Projects">
@@ -30,5 +32,17 @@ const projects = (await getCollection('projects')).sort(
 				</a>
 			))}
 		</div>
+
+		{minorProjects.length > 0 && (
+			<p data-reveal class="mt-10 text-sm text-slate-400">
+				Also:{' '}
+				{minorProjects.map((project, i) => (
+					<>
+						<a href={`/projects/${project.id}`} class="underline hover:text-slate-600">{project.data.title}</a>
+						{i < minorProjects.length - 1 ? ', ' : ''}
+					</>
+				))}
+			</p>
+		)}
 	</section>
 </Layout>

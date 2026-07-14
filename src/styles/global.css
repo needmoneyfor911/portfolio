@@ -191,6 +191,28 @@
 	color: var(--color-slate-500);
 }
 
+/* Opt-in grid layout for a run of photos (see .gallery usage in project
+   markdown) -- keeps DOM order (so captions still read chronologically)
+   but lays tiles out side by side instead of one full-width figure per
+   scroll. Cropped to a consistent aspect ratio so mixed portrait/landscape
+   photos still form a tidy grid. */
+.prose .gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 1.5rem;
+	margin: 2rem 0;
+}
+
+.prose .gallery figure {
+	margin: 0;
+}
+
+.prose .gallery figure img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}
+
 /* Reduced motion: keep color transitions (they aid comprehension) but drop
    all movement on hover/press/nav effects. The scroll-reveal system needs no
    entry here -- the script never adds .js-reveal-ready when this is set, so
