@@ -9,7 +9,7 @@ featured: true
 
 ## Overview
 
-My uncle gifted me a 1:48-scale die-cast F1 car. As it sat on my desk for a few months, my curiosity grew to see how it would behave in a Wind Tunnel. Thus, I designed and built a compact wind tunnel fitted for 1:48-scale cars and small enough to live on a desk. Note that this model is purely decorative.
+My uncle gifted me a 1:48-scale die-cast F1 car, and after it sat on my desk for a few months, I decided to create a Wind Tunnel for it to sit on my desktop. Note that this model is purely decorative.
 
 <figure>
 	<img src="/images/assembly_windtunnel.png" alt="Solidworks assembly of the wind tunnel" />
@@ -25,4 +25,4 @@ When splitting the model, the main objective was to ensure ease of assembly and 
 	<figcaption>The finished, assembled wind tunnel</figcaption>
 </figure>
 
-The finished tunnel met its goals of a printable design that assembles into a clean continuous duct, with visual flow through the test section, and a piece I'm happy to keep in view on my desk.
+The finished tunnel met its goals of a printable design that assembles into a clean look, with visual flow through the test section, and a piece I'm happy to keep in view on my desk.;

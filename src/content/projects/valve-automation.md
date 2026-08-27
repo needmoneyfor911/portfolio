@@ -3,8 +3,8 @@ title: Valve Automation
 description: Valve Automation
 date: 2026-08-01
 category: Work
-tags: [C, Arduino]
-featured: false
+tags: [C, Arduino, Python, GUI]
+featured: true
 ---
 
-Work In Progress...
+Automation on a window to control, monitor, and log the pressures while operating the two stage light gas gun
