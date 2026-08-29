@@ -4,7 +4,7 @@ description: Windtunnel for 1:48 scale cars
 date: 2025-08-09
 category: Personal
 tags: [Solidworks, 3D Printing]
-featured: true
+featured: false
 ---
 
 ## Overview

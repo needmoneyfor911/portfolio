@@ -4,7 +4,7 @@ description: Inductive coil system to measure projectile velocity from induced v
 date: 2026-07-02
 category: Work
 tags: [Solidworks, 3D Printing, Python]
-featured: true
+featured: false
 ---
 
 A magnetized projectiles' velocity can be measured using Faraday's law of induction, where the rate of change of magnetic flux with respect to time changes. By placing two coils at a known distance apart, and measuring the zero crossing's of the bi-polar voltage pulse(when projectile is centered in coil), which acts as a time marker, gives everything needed to calculate the average veloctiy.
