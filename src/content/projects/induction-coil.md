@@ -7,13 +7,13 @@ tags: [Solidworks, 3D Printing, Python]
 featured: false
 ---
 
-A magnetized projectiles' velocity can be measured using Faraday's law of induction, where the rate of change of magnetic flux with respect to time changes. By placing two coils at a known distance apart, and measuring the zero crossing's of the bi-polar voltage pulse(when projectile is centered in coil), which acts as a time marker, gives everything needed to calculate the average veloctiy.
+A magnetized projectile passing through a coil of wire will induce a voltage in it. By placing two coils at a known distance apart, and measuring the zero crossings of the bi-polar voltage pulse (when projectile is centered in coil), which acts as a time marker, allows the calculation of the projectiles velocity.
 
 Since the projectile must carry a magnetic field, I attached magnets to the hollow tail of .177 caliber pellets. A sliding twin-spool fixture was designed and 3D-printed to hold the coils at a known distance apart, wound at a certain radius, and be able to slide on to the 'barrel' and to cantilever off the 'barrel'.
 
 <figure>
 	<img src="/images/induction-coil/induction_coil_apparatus.jpeg" alt="Full set up testing the induction coil connected to PicoScope" />
-	<figcaption>Watertight check performed in ANSA</figcaption>
+	<figcaption>Full set up testing the induction coil connected to PicoScope</figcaption>
 </figure>
 
 Before testing, the expected voltage reading, waveform, maximums and minimums were found using Python from plotting the derived induced EMF formula where EMF = f(...) against the distance.

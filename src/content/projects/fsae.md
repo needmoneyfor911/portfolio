@@ -9,6 +9,8 @@ featured: false
 
 My work on the aerodynamics package for the Q26 Formula SAE car. 
 
+## Sidepod / Side Diffuser
+
 The team moved the radiator to the rear of the car, cooled by an electric fan instead of air from the sidepod. Freed from its cooling duty, the sidepod could be redesigned purely to generate downforce.
 
 <figure>
@@ -25,11 +27,18 @@ Because this was designed early in the year, the model is fully parametric: vari
 	<figcaption>Watertight check performed in ANSA</figcaption>
 </figure>
 
+## Mounting Rib
+
+<figure>
+	<img src="/images/mountingrib.jpg" alt="CATIA model of the rear wing mounting rib" />
+	<figcaption>CATIA model of the rear wing mounting rib</figcaption>
+</figure>
+
 ## Swan Neck
 
 Swan necks were designed to mount and support the rear wing. The swan neck design was chosen to keep the wing's suction side clean. This was designed using SolidWorks, using FEA to confirm the part will be suffice under loads.
 
 <figure>
 	<img src="/images/swanneck_solidworks.png" alt="SolidWorks model of swan neck mount" />
-	<figcaption>Caption shown under the image</figcaption>
+	<figcaption>SolidWorks model of swan neck mount</figcaption>
 </figure>
