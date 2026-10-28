@@ -16,7 +16,7 @@ My uncle gifted me a 1:48-scale die-cast F1 car, and after it sat on my desk for
 	<figcaption>Solidworks assembly of the wind tunnel</figcaption>
 </figure>
 
-The dominant manufacturing constraint was limited print volume. The assembled tunnel is far larger than my printer's bed, so the model had to be split into separate printable sections.
+The main manufacturing constraint was limited print volume. The assembled tunnel is far larger than my printer's bed, so the model had to be split into separate printable sections.
 
 When splitting the model, the main objective was to ensure ease of assembly and have a clean external finish. A risk with sectioning a part like this is alignment, as misaligned sections can introduce gaps that disturb the flow and do not look good. Thus I used dowel pins and lip-and-groove joints to ensure a flush and aligned surface.
 
