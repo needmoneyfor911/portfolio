@@ -15,7 +15,6 @@ Consult these guides before working on related tasks:
 ## Project
 
 Static Astro 7 site. Deploys to Netlify. No adapter, no SSR.
-Replacing a Hugo site at finleybatesmith.com. Never touch ../mysite.
 
 ## Owner context
 
