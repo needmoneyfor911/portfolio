@@ -25,4 +25,4 @@ When splitting the model, the main objective was to ensure ease of assembly and 
 	<figcaption>The finished, assembled wind tunnel</figcaption>
 </figure>
 
-The finished tunnel met its goals of a printable design that assembles into a clean look, with visual flow through the test section, and a piece I'm happy to keep in view on my desk.;
+The finished tunnel met its goals of a printable design that assembles into a clean look, with visual flow through the test section, and a piece I'm happy to keep in view on my desk.

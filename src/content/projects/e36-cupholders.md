@@ -7,7 +7,7 @@ tags: [Solidworks, 3D Printing]
 featured: false
 ---
 
-A major flaw on E36's is the absence of cupholders, as BMW offered ashtray's instead. I decided to design and fabricate my own. My objectives with the design was holding the average drink size, looking OEM / fitting interior aesthetic, and not needing to drill or cut any part; leaving it fully reversible.
+A major flaw on E36s is the absence of cupholders, as BMW offered ashtrays instead. I decided to design and fabricate my own. My objectives with the design were holding the average drink size, looking OEM / fitting interior aesthetic, and not needing to drill or cut any part; leaving it fully reversible.
 
 <figure>
 	<img src="/images/drinks.jpeg" alt="Finished cupholder installed in the E36 console holding drinks" />
@@ -23,7 +23,7 @@ I was able to re-use the expanding rivet and the existing mounting holes of the 
 	<figcaption>Solidworks model of the cupholder insert</figcaption>
 </figure>
 
-For dark interior car parts, which can be exposed to the sun for a long period of time, ASA and ABS are preffered. I went with ASA since it has the best material properties, however the trade off is that it is much harder to print and is sucseptible to warping. I had some trouble initially getting a succesful print, but after some failed prints and finding solutions online, I pre-heat the bed and chamber, and added brim to get a valid print. These two steps were most effective on providing a satisfactory print.
+For dark interior car parts, which can be exposed to the sun for a long period of time, ASA and ABS are preferred. I went with ASA since it has the best material properties, however the trade off is that it is much harder to print and is susceptible to warping. I had some trouble initially getting a successful print, but after some failed prints and finding solutions online, I pre-heated the bed and chamber, and added brim to get a valid print. These two steps were most effective on providing a satisfactory print.
 
 I am pleased with the final outcome. The cupholder fits snug, remains stable, and meets my initial objectives. I believe it matches the interior aesthetic well.
 

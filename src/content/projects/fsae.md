@@ -29,6 +29,8 @@ Because this was designed early in the year, the model is fully parametric: vari
 
 ## Mounting Rib
 
+The mounting rib uses the rear wing's airfoil profile and transfers wing loads into the swan necks through the two lugs on its upper surface. The truss replaces a solid web, saving weight while keeping the rib stiff, and the central slot accepts the wing's main spar. Like the sidepod, the rib was built from an imported airfoil and driven by parameters, so it could be updated if the wing design changed.
+
 <figure>
 	<img src="/images/mountingrib.jpg" alt="CATIA model of the rear wing mounting rib" />
 	<figcaption>CATIA model of the rear wing mounting rib</figcaption>

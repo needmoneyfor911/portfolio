@@ -18,8 +18,7 @@ Static Astro 7 site. Deploys to Netlify. No adapter, no SSR.
 
 ## Owner context
 
-Strong engineering fundamentals, zero web-stack knowledge, learning
-this deliberately. Explain, don't just do.
+Strong engineering fundamentals, zero web-stack knowledge, learning this deliberately. Explain, don't just do.
 
 ## Hard rules
 
