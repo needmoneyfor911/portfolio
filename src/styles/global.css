@@ -1,7 +1,17 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Brand palette. Tailwind (build time, Node) turns each --color-* token into
+   utility classes: bg-midnight, text-electric, border-cantaloupe, etc. */
+@theme {
+	--color-midnight: #02070a;
+	--color-electric: #0297de;
+	--color-cantaloupe: #fc734d;
+}
+
 :root {
+	color-scheme: dark;
+
 	/* Custom easing curves. The built-in CSS ones (ease, ease-in-out) are too
 	   weak to feel intentional -- these are stronger, more "designed" variants. */
 	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -14,7 +24,7 @@
 
 /* Keyboard-visible focus ring. */
 :focus-visible {
-	outline: 2px solid var(--color-sky-600);
+	outline: 2px solid var(--color-cantaloupe);
 	outline-offset: 2px;
 	border-radius: 2px;
 }
@@ -55,11 +65,11 @@
 	position: sticky;
 	top: 0;
 	z-index: 50;
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.55));
+	background: linear-gradient(180deg, rgba(2, 7, 10, 0.85), rgba(2, 7, 10, 0.65));
 	backdrop-filter: blur(20px) saturate(180%);
 	-webkit-backdrop-filter: blur(20px) saturate(180%);
 	border-bottom: 1px solid transparent;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 	transition:
 		border-color var(--duration-base) var(--ease-out),
 		box-shadow var(--duration-base) var(--ease-out);
@@ -69,21 +79,21 @@
    content is now passing underneath it, so it earns a stronger shadow and a
    visible edge instead of floating with no separation from the page. */
 .site-header[data-scrolled='true'] {
-	border-bottom-color: rgba(15, 23, 42, 0.06);
+	border-bottom-color: rgba(255, 255, 255, 0.08);
 	box-shadow:
-		inset 0 1px 0 rgba(255, 255, 255, 0.9),
-		0 8px 24px rgba(15, 23, 42, 0.06);
+		inset 0 1px 0 rgba(255, 255, 255, 0.08),
+		0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* .btn-glass reads its colors from custom properties, so a color variant is
    just a class that overrides them -- the material (gradient direction,
    specular highlight, blur, shadow shape) stays identical everywhere. */
 .btn-glass {
-	--glass-from: var(--color-sky-500);
-	--glass-to: var(--color-sky-600);
-	--glass-hover-from: var(--color-sky-400);
-	--glass-hover-to: var(--color-sky-500);
-	--glass-glow: rgba(2, 132, 199, 0.35);
+	--glass-from: var(--color-electric);
+	--glass-to: color-mix(in srgb, var(--color-electric) 75%, black);
+	--glass-hover-from: color-mix(in srgb, var(--color-electric) 80%, white);
+	--glass-hover-to: var(--color-electric);
+	--glass-glow: rgba(2, 151, 222, 0.4);
 
 	position: relative;
 	background: linear-gradient(180deg, var(--glass-from), var(--glass-to));
@@ -100,44 +110,52 @@
 	}
 }
 
-/* LinkedIn's brand blue. */
-.btn-glass-linkedin {
-	--glass-from: #0a66c2;
-	--glass-to: #0a5cae;
-	--glass-hover-from: #1974d2;
-	--glass-hover-to: #0a66c2;
-	--glass-glow: rgba(10, 102, 194, 0.35);
+/* Neutral surface for email -- a faint frosted-white tint on the dark page
+   instead of a colored fill, with a soft dark shadow instead of a glow. */
+.btn-glass-light {
+	--glass-from: rgba(255, 255, 255, 0.12);
+	--glass-to: rgba(255, 255, 255, 0.05);
+	--glass-hover-from: rgba(255, 255, 255, 0.18);
+	--glass-hover-to: rgba(255, 255, 255, 0.08);
+	--glass-glow: rgba(0, 0, 0, 0.4);
 }
 
-/* Light neutral surface for email -- dark text instead of white, and a
-   soft neutral shadow instead of a colored glow. */
-.btn-glass-light {
-	--glass-from: #ffffff;
-	--glass-to: var(--color-slate-100);
-	--glass-hover-from: #ffffff;
-	--glass-hover-to: #ffffff;
-	--glass-glow: rgba(15, 23, 42, 0.12);
+/* Soft brand-colored glow behind the home hero. Only index.astro uses it.
+   Each gradient fades to transparent before reaching the box's bottom edge,
+   so there is no visible line where the glow ends. */
+.hero-glow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 800px;
+	z-index: -1;
+	pointer-events: none;
+	background:
+		radial-gradient(ellipse 60% 55% at 85% 20%, rgba(2, 151, 222, 0.22), transparent 70%),
+		radial-gradient(ellipse 45% 45% at 10% 65%, rgba(252, 115, 77, 0.12), transparent 70%);
 }
 
 .card {
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4));
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
 	backdrop-filter: blur(16px) saturate(180%);
 	-webkit-backdrop-filter: blur(16px) saturate(180%);
-	border: 1px solid rgba(255, 255, 255, 0.7);
+	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 1rem;
 	box-shadow:
-		inset 0 1px 0 rgba(255, 255, 255, 0.8),
-		0 1px 2px rgba(15, 23, 42, 0.04),
-		0 8px 20px rgba(15, 23, 42, 0.06);
+		inset 0 1px 0 rgba(255, 255, 255, 0.08),
+		0 1px 2px rgba(0, 0, 0, 0.4),
+		0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 @media (hover: hover) and (pointer: fine) {
 	.card:hover {
 		transform: translateY(-2px);
+		border-color: rgba(252, 115, 77, 0.6);
 		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.9),
-			0 1px 2px rgba(15, 23, 42, 0.05),
-			0 16px 32px rgba(15, 23, 42, 0.1);
+			inset 0 1px 0 rgba(255, 255, 255, 0.12),
+			0 1px 2px rgba(0, 0, 0, 0.5),
+			0 16px 32px rgba(252, 115, 77, 0.15);
 	}
 }
 
@@ -168,7 +186,7 @@
 
 .prose figure img {
 	border-radius: 0.5rem;
-	border: 1px solid var(--color-slate-200);
+	border: 1px solid rgba(255, 255, 255, 0.1);
 	margin-bottom: 0;
 }
 
@@ -188,7 +206,7 @@
 	margin-top: 0.5rem;
 	text-align: center;
 	font-size: 0.875rem;
-	color: var(--color-slate-500);
+	color: var(--color-slate-400);
 }
 
 /* Opt-in grid layout for a run of photos (see .gallery usage in project

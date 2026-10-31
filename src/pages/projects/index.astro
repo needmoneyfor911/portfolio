@@ -21,12 +21,12 @@ const minorProjects = allProjects.filter((project) => project.data.minor);
 					style={`transition-delay: ${i * 60}ms`}
 					class="card block p-5"
 				>
-					<p class="text-xs font-semibold uppercase tracking-wide text-sky-600 mb-1">{project.data.category}</p>
+					<p class="text-xs font-semibold uppercase tracking-wide text-cantaloupe mb-1">{project.data.category}</p>
 					<h2 class="font-medium text-lg mb-1">{project.data.title}</h2>
-					<p class="text-sm text-slate-500 mb-3">{project.data.description}</p>
+					<p class="text-sm text-slate-400 mb-3">{project.data.description}</p>
 					<ul class="flex flex-wrap gap-2">
 						{project.data.tags.map((tag) => (
-							<li class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs text-slate-600">{tag}</li>
+							<li class="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs text-slate-300">{tag}</li>
 						))}
 					</ul>
 				</a>
@@ -38,7 +38,7 @@ const minorProjects = allProjects.filter((project) => project.data.minor);
 				Also:{' '}
 				{minorProjects.map((project, i) => (
 					<>
-						<a href={`/projects/${project.id}`} class="underline hover:text-slate-600">{project.data.title}</a>
+						<a href={`/projects/${project.id}`} class="underline hover:text-electric">{project.data.title}</a>
 						{i < minorProjects.length - 1 ? ', ' : ''}
 					</>
 				))}

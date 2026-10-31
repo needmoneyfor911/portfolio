@@ -24,7 +24,7 @@ const navLinks = [
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} · Finley Bate-Smith</title>
 	</head>
-	<body class="min-h-screen bg-white text-slate-900 flex flex-col">
+	<body class="min-h-screen bg-midnight text-slate-100 flex flex-col">
 		<header class="site-header">
 			<nav class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
 				<a href="/" class="font-semibold tracking-tight text-lg">Finley Bate-Smith</a>
@@ -33,7 +33,7 @@ const navLinks = [
 						<li>
 							<a
 								href={link.href}
-								class="text-slate-600 hover:text-slate-900 transition-colors"
+								class="text-slate-300 hover:text-electric transition-colors"
 								aria-current={Astro.url.pathname === link.href ? 'page' : undefined}
 								target={link.external ? '_blank' : undefined}
 								rel={link.external ? 'noopener noreferrer' : undefined}
@@ -50,8 +50,8 @@ const navLinks = [
 			<slot />
 		</main>
 
-		<footer class="border-t border-slate-200">
-			<div class="mx-auto max-w-4xl px-6 py-6 text-sm text-slate-500">
+		<footer class="border-t border-slate-800">
+			<div class="mx-auto max-w-4xl px-6 py-6 text-sm text-slate-400">
 				&copy; {new Date().getFullYear()} Finley Bate-Smith. All rights reserved.
 			</div>
 		</footer>

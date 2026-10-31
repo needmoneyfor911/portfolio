@@ -12,9 +12,10 @@ const linkedinUrl = 'https://linkedin.com/in/finley-bate-smith';
 ---
 
 <Layout title="Home">
+	<div class="hero-glow" aria-hidden="true"></div>
 	<section class="mx-auto max-w-4xl px-6 pt-60 pb-24">
 		<h1 data-reveal class="text-5xl font-bold tracking-tight mb-4">Finley Bate-Smith</h1>
-		<p data-reveal style="transition-delay: 70ms" class="max-w-xl text-lg text-slate-600">
+		<p data-reveal style="transition-delay: 70ms" class="max-w-xl text-lg text-slate-300">
 			Mechanical Engineering Student @ Queen's University
 		</p>
 		<div data-reveal style="transition-delay: 140ms" class="mt-8 flex gap-4">
@@ -31,7 +32,7 @@ const linkedinUrl = 'https://linkedin.com/in/finley-bate-smith';
 				target="_blank"
 				rel="noopener noreferrer"
 				aria-label="LinkedIn"
-				class="icon-link text-slate-500 hover:text-slate-900"
+				class="icon-link text-slate-400 hover:text-electric"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
 					<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -40,7 +41,7 @@ const linkedinUrl = 'https://linkedin.com/in/finley-bate-smith';
 			<a
 				href={`mailto:${email}`}
 				aria-label="Email"
-				class="icon-link text-slate-500 hover:text-slate-900"
+				class="icon-link text-slate-400 hover:text-electric"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0-.828.672-1.5 1.5-1.5h16.5c.828 0 1.5.672 1.5 1.5v10.5c0 .828-.672 1.5-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5V6.75Z" />
@@ -50,20 +51,20 @@ const linkedinUrl = 'https://linkedin.com/in/finley-bate-smith';
 		</div>
 	</section>
 
-	<section class="mx-auto max-w-4xl px-6 py-16 border-t border-slate-200">
+	<section class="mx-auto max-w-4xl px-6 py-16 border-t border-slate-800">
 		<h2 class="text-2xl font-semibold mb-4">About</h2>
-		<p class="max-w-2xl text-slate-600">
+		<p class="max-w-2xl text-slate-300">
 			I am a third year mechanical engineering student at Queen's University. I previously worked at the Royal Military College of Canada, helping commission a two stage light gas gun. Right now, I am working on the aerodynamics package for the car on the Queen's Formula SAE team.
 		</p>
 		<p class="mt-4">
-			<a href="/about" class="text-sky-600 hover:text-sky-700">More about me →</a>
+			<a href="/about" class="text-electric hover:text-cantaloupe">More about me →</a>
 		</p>
 	</section>
 
-	<section class="mx-auto max-w-4xl px-6 py-16 border-t border-slate-200">
+	<section class="mx-auto max-w-4xl px-6 py-16 border-t border-slate-800">
 		<div class="flex items-center justify-between mb-6">
 			<h2 class="text-2xl font-semibold">Featured Projects</h2>
-			<a href="/projects" class="text-sm text-sky-600 hover:text-sky-700">View all &rarr;</a>
+			<a href="/projects" class="text-sm text-electric hover:text-cantaloupe">View all &rarr;</a>
 		</div>
 		<div class="grid gap-6 sm:grid-cols-2">
 			{featuredProjects.map((project, i) => (
@@ -73,13 +74,13 @@ const linkedinUrl = 'https://linkedin.com/in/finley-bate-smith';
 					style={`transition-delay: ${i * 60}ms`}
 					class="card block p-5"
 				>
-					<p class="text-xs font-semibold uppercase tracking-wide text-sky-600 mb-1">{project.data.category}</p>
+					<p class="text-xs font-semibold uppercase tracking-wide text-cantaloupe mb-1">{project.data.category}</p>
 					<h3 class="font-medium text-lg mb-1">{project.data.title}</h3>
-					<p class="text-sm text-slate-500">{project.data.description}</p>
+					<p class="text-sm text-slate-400">{project.data.description}</p>
 				</a>
 			))}
 			{featuredProjects.length === 0 && (
-				<p class="text-slate-500 text-sm">No featured projects yet — mark one with `featured: true`.</p>
+				<p class="text-slate-400 text-sm">No featured projects yet — mark one with `featured: true`.</p>
 			)}
 		</div>
 	</section>
