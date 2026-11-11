@@ -1,12 +1,33 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Brand palette. Tailwind (build time, Node) turns each --color-* token into
-   utility classes: bg-midnight, text-electric, border-cantaloupe, etc. */
+/* Palette: near-black neutral, cool-grey text, one light-blue accent.
+   Restraint is the point -- the accent only appears on focus rings, card
+   hover borders and the faint hero glow, so it still means something when it
+   shows up. Tailwind (build time, Node) turns each --color-* token into
+   utility classes: bg-midnight, text-electric, border-slate-800, etc.
+   The token names are left over from earlier palettes: "midnight" is now the
+   near-black page colour, "electric" is the light-blue accent and
+   "cantaloupe" its lighter hover shade. */
 @theme {
-	--color-midnight: #02070a;
-	--color-electric: #0297de;
-	--color-cantaloupe: #fc734d;
+	--color-midnight: #0a0a0b;
+	--color-surface: #121214;
+	--color-electric: #8fd0ff;
+	--color-cantaloupe: #bfe5ff;
+
+	/* Override the slate shades the site uses with a neutral, very slightly
+	   cool grey scale so the existing text-slate-* / border-slate-* classes
+	   read well on near-black. slate-400 on #0a0a0b is about 6:1 contrast. */
+	--color-slate-100: #f5f5f7;
+	--color-slate-200: #e2e2e8;
+	--color-slate-300: #c2c2cc;
+	--color-slate-400: #8f8f9b;
+	--color-slate-600: #4a4a55;
+	--color-slate-700: #34343c;
+	--color-slate-800: #232328;
+
+	--font-sans: 'Inter', ui-sans-serif, system-ui, 'Helvetica Neue', Arial, sans-serif;
+	--font-display: 'Inter', ui-sans-serif, system-ui, 'Helvetica Neue', Arial, sans-serif;
 }
 
 :root {
@@ -19,12 +40,65 @@
 
 	--duration-fast: 150ms;
 	--duration-base: 220ms;
-	--duration-slow: 500ms;
+	--duration-slow: 400ms;
+}
+
+/* Page background: a soft colour mesh pinned to the viewport on every page.
+   Each glow is a radial gradient parked at an edge or corner, i.e. in the
+   margins around the centred content column rather than behind the text.
+   Runs in the browser as plain CSS and is static, so there is nothing to
+   reduce for prefers-reduced-motion. z-index -1 puts it behind all content,
+   and pointer-events: none means it can never block a click. */
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background:
+		radial-gradient(40% 45% at 0% 8%, rgba(50, 130, 220,0.28), transparent 70%),
+		radial-gradient(38% 42% at 100% 30%, rgba(50, 130, 220,0.2), transparent 70%),
+		radial-gradient(45% 40% at 5% 100%, rgba(50, 130, 220,0.14), transparent 70%);
+}
+
+/* Silk streaks: thin, unevenly spaced arcs that read as curved light on
+   satin. The circle is centred off-screen at the bottom-left, and a mask
+   keeps the streaks to that corner so they fade out well before the
+   centred content column. */
+body::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background: repeating-radial-gradient(
+		circle at -8% 108%,
+		transparent 0,
+		transparent 46px,
+		rgba(255, 255, 255, 0.09) 47px,
+		transparent 50px,
+		transparent 74px,
+		rgba(255, 255, 255, 0.05) 75px,
+		transparent 77px,
+		transparent 118px
+	);
+	-webkit-mask-image: radial-gradient(ellipse 55% 60% at 0% 100%, #000 0%, transparent 70%);
+	mask-image: radial-gradient(ellipse 55% 60% at 0% 100%, #000 0%, transparent 70%);
+}
+
+/* Headings: semi-bold with tight tracking, so large type reads as one solid
+   block. */
+h1,
+h2,
+h3 {
+	font-family: var(--font-display);
+	font-weight: 600;
+	letter-spacing: -0.035em;
 }
 
 /* Keyboard-visible focus ring. */
 :focus-visible {
-	outline: 2px solid var(--color-cantaloupe);
+	outline: 2px solid var(--color-electric);
 	outline-offset: 2px;
 	border-radius: 2px;
 }
@@ -35,12 +109,16 @@
 	transition:
 		transform var(--duration-fast) var(--ease-out),
 		background-color var(--duration-base) var(--ease-out),
-		border-color var(--duration-base) var(--ease-out),
-		box-shadow var(--duration-base) var(--ease-out);
+		border-color var(--duration-base) var(--ease-out);
 }
 
 .btn:active {
 	transform: scale(0.97);
+}
+
+/* Cards are big, so the press is subtler than a button's. */
+.card:active {
+	transform: scale(0.98);
 }
 
 .icon-link {
@@ -50,113 +128,173 @@
 }
 
 .icon-link:active {
-	transform: scale(0.92);
+	transform: scale(0.95);
 }
 
-/* --- Liquid Glass material ---
-   A translucent surface that reads as physical glass: a bright inset
-   highlight along the top edge (where light catches the surface), a soft
-   shadow beneath it (so it looks like it's sitting above the page, not
-   printed on it), and blur+saturate so anything that scrolls underneath
-   shows through softened and color-boosted. Used on the nav, the primary
-   button, and project cards. */
+/* --- Surfaces ---
+   Translucent white panels on deep blue with 1px hairline borders, no
+   shadows. Used on the nav, the buttons, and project cards. */
 
 .site-header {
 	position: sticky;
 	top: 0;
 	z-index: 50;
-	background: linear-gradient(180deg, rgba(2, 7, 10, 0.85), rgba(2, 7, 10, 0.65));
-	backdrop-filter: blur(20px) saturate(180%);
-	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	border-bottom: 1px solid transparent;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-	transition:
-		border-color var(--duration-base) var(--ease-out),
-		box-shadow var(--duration-base) var(--ease-out);
+	background: rgba(10, 10, 11, 0.75);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* Once scrolled, the material reads as "thicker" -- a page's worth of
-   content is now passing underneath it, so it earns a stronger shadow and a
-   visible edge instead of floating with no separation from the page. */
-.site-header[data-scrolled='true'] {
-	border-bottom-color: rgba(255, 255, 255, 0.08);
-	box-shadow:
-		inset 0 1px 0 rgba(255, 255, 255, 0.08),
-		0 8px 24px rgba(0, 0, 0, 0.5);
-}
-
-/* .btn-glass reads its colors from custom properties, so a color variant is
-   just a class that overrides them -- the material (gradient direction,
-   specular highlight, blur, shadow shape) stays identical everywhere. */
+/* Buttons are pills. .btn-glass is the solid off-white primary with
+   near-black text; .btn-glass-light (added next to it) turns it into the
+   outlined secondary. The class names are kept from the old glass look so
+   the pages that use them don't need to change. */
 .btn-glass {
-	--glass-from: var(--color-electric);
-	--glass-to: color-mix(in srgb, var(--color-electric) 75%, black);
-	--glass-hover-from: color-mix(in srgb, var(--color-electric) 80%, white);
-	--glass-hover-to: var(--color-electric);
-	--glass-glow: rgba(2, 151, 222, 0.4);
-
-	position: relative;
-	background: linear-gradient(180deg, var(--glass-from), var(--glass-to));
-	backdrop-filter: blur(12px) saturate(180%);
-	-webkit-backdrop-filter: blur(12px) saturate(180%);
-	box-shadow:
-		inset 0 1px 0 rgba(255, 255, 255, 0.5),
-		0 4px 14px var(--glass-glow);
+	background: var(--color-slate-100);
+	color: var(--color-midnight);
+	border: 1px solid var(--color-slate-100);
+	border-radius: 9999px;
 }
 
 @media (hover: hover) and (pointer: fine) {
 	.btn-glass:hover {
-		background: linear-gradient(180deg, var(--glass-hover-from), var(--glass-hover-to));
+		background: var(--color-slate-300);
+		border-color: var(--color-slate-300);
 	}
 }
 
-/* Neutral surface for email -- a faint frosted-white tint on the dark page
-   instead of a colored fill, with a soft dark shadow instead of a glow. */
 .btn-glass-light {
-	--glass-from: rgba(255, 255, 255, 0.12);
-	--glass-to: rgba(255, 255, 255, 0.05);
-	--glass-hover-from: rgba(255, 255, 255, 0.18);
-	--glass-hover-to: rgba(255, 255, 255, 0.08);
-	--glass-glow: rgba(0, 0, 0, 0.4);
+	background: transparent;
+	color: #ffffff;
+	border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Soft brand-colored glow behind the home hero. Only index.astro uses it.
-   Each gradient fades to transparent before reaching the box's bottom edge,
-   so there is no visible line where the glow ends. */
+@media (hover: hover) and (pointer: fine) {
+	.btn-glass-light:hover {
+		background: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.6);
+	}
+}
+
+/* Layered mesh glow behind the home hero: three overlapping indigo glows
+   along the top edge (one hue, so the site stays a three-colour palette:
+   near-black, light blue, off-white). The strongest colour sits on the top edge
+   and fades out before the headline block, so the text stays on dark. Only
+   index.astro uses it. Every gradient fades to transparent before reaching
+   the box's edges, so there is no visible line where the glow ends. */
 .hero-glow {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 800px;
+	height: 900px;
 	z-index: -1;
 	pointer-events: none;
 	background:
-		radial-gradient(ellipse 60% 55% at 85% 20%, rgba(2, 151, 222, 0.22), transparent 70%),
-		radial-gradient(ellipse 45% 45% at 10% 65%, rgba(252, 115, 77, 0.12), transparent 70%);
+		radial-gradient(ellipse 45% 40% at 98% 4%, rgba(50, 130, 220,0.3), transparent 70%),
+		radial-gradient(ellipse 50% 45% at 45% -4%, rgba(50, 130, 220,0.34), transparent 70%),
+		radial-gradient(ellipse 55% 50% at 0% 2%, rgba(50, 130, 220,0.5), transparent 70%);
+}
+
+/* Silk streaks across the top-right of the hero, over the glow. The
+   mask confines them to that corner, away from the headline on the left. */
+.hero-glow::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: repeating-radial-gradient(
+		circle at 108% -12%,
+		transparent 0,
+		transparent 40px,
+		rgba(255, 255, 255, 0.12) 41px,
+		transparent 45px,
+		transparent 66px,
+		rgba(255, 255, 255, 0.06) 67px,
+		transparent 69px,
+		transparent 104px
+	);
+	-webkit-mask-image: radial-gradient(ellipse 60% 55% at 100% 0%, #000 0%, transparent 70%);
+	mask-image: radial-gradient(ellipse 60% 55% at 100% 0%, #000 0%, transparent 70%);
+}
+
+/* Full-width panel in the style of a stacked section: a deep navy mesh (the
+   same light-blue hue, darkened) with rounded top corners, so it reads as a
+   sheet sliding over the page. It is kept dark enough that light-grey text
+   stays above 4.5:1 contrast.
+   Wrap a section in it (see index.astro) so the section's contents stay in
+   the normal centred column. */
+.band {
+	background:
+		radial-gradient(ellipse 55% 70% at 100% 0%, rgba(50, 130, 220,0.4), transparent 70%),
+		radial-gradient(ellipse 50% 60% at 0% 100%, rgba(50, 130, 220,0.28), transparent 70%),
+		linear-gradient(180deg, #0b1a2e, #0a0f18);
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 2rem 2rem 0 0;
 }
 
 .card {
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-	backdrop-filter: blur(16px) saturate(180%);
-	-webkit-backdrop-filter: blur(16px) saturate(180%);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 1rem;
-	box-shadow:
-		inset 0 1px 0 rgba(255, 255, 255, 0.08),
-		0 1px 2px rgba(0, 0, 0, 0.4),
-		0 8px 20px rgba(0, 0, 0, 0.4);
+	background: rgba(255, 255, 255, 0.07);
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 1.25rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
 	.card:hover {
-		transform: translateY(-2px);
-		border-color: rgba(252, 115, 77, 0.6);
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.12),
-			0 1px 2px rgba(0, 0, 0, 0.5),
-			0 16px 32px rgba(252, 115, 77, 0.15);
+		background: rgba(255, 255, 255, 0.12);
+		border-color: var(--color-electric);
 	}
+}
+
+/* Viewfinder brackets: two small L-shaped corners just outside the card (top
+   left and bottom right), like a callout on an engineering drawing. They sit
+   offset outward and slide in to frame the card on hover. Only opacity and
+   transform animate, so it stays off the layout/paint path. Gated behind
+   hover: hover so touch screens never get a stuck state. */
+.card {
+	position: relative;
+}
+
+.card::before,
+.card::after {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	pointer-events: none;
+	opacity: 0;
+	transition:
+		opacity var(--duration-base) var(--ease-out),
+		transform var(--duration-base) var(--ease-out);
+}
+
+.card::before {
+	top: -7px;
+	left: -7px;
+	border-top: 1px solid var(--color-electric);
+	border-left: 1px solid var(--color-electric);
+	transform: translate(-4px, -4px);
+}
+
+.card::after {
+	bottom: -7px;
+	right: -7px;
+	border-bottom: 1px solid var(--color-electric);
+	border-right: 1px solid var(--color-electric);
+	transform: translate(4px, 4px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.card:hover::before,
+	.card:hover::after {
+		opacity: 1;
+		transform: translate(0, 0);
+	}
+}
+
+/* Highlighted text picks up the accent instead of the browser default blue. */
+::selection {
+	background: rgba(143, 208, 255, 0.3);
+	color: #ffffff;
 }
 
 /* Generic scroll-reveal: fade + rise, applied once per element and never
@@ -236,11 +374,9 @@
    entry here -- the script never adds .js-reveal-ready when this is set, so
    [data-reveal] and figure images simply never enter a hidden state. */
 @media (prefers-reduced-motion: reduce) {
-	.site-header,
 	.card,
 	.btn,
 	.icon-link {
-		transition-duration: 1ms !important;
 		transform: none !important;
 	}
 }

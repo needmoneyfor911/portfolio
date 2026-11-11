@@ -4,7 +4,7 @@ description: MCP Server to Connect Claude to Solidworks
 date: 2026-11-02
 category: Personal
 tags: [Python, MCP]
-featured: true
+featured: false
 ---
 
 This project is an MCP (Model Context Protocol) server that connects Claude to SolidWorks, allowing Claude to inspect, build, and edit CAD models through conversation. My objectives were to cover the full CAD workflow, from sketching a part to assembling it and producing drawings, and to make it safe to use on real files.

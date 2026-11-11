@@ -15,14 +15,16 @@ const githubUrl = 'https://github.com/needmoneyfor911';
 <Layout title="Home">
 	<div class="hero-glow" aria-hidden="true"></div>
 	<section class="mx-auto max-w-4xl px-6 pt-60 pb-24">
-		<h1 data-reveal class="text-5xl font-bold tracking-tight mb-4">Finley Bate-Smith</h1>
-		<p data-reveal style="transition-delay: 70ms" class="max-w-xl text-lg text-slate-300">
-			Mechanical Engineering Student @ Queen's University
-		</p>
+		<h1 data-reveal class="text-6xl sm:text-7xl">
+			Finley Bate-Smith
+			<span class="mt-4 block text-xl font-medium tracking-normal text-electric sm:text-2xl">
+				Mechanical Engineering Student @ Queen's University
+			</span>
+		</h1>
 		<div data-reveal style="transition-delay: 140ms" class="mt-8 flex gap-4">
 			<a
 				href="/projects"
-				class="btn btn-glass rounded-full px-5 py-2.5 text-sm font-medium text-white"
+				class="btn btn-glass rounded-full px-6 py-3 text-sm font-medium"
 			>
 				View my projects
 			</a>
@@ -73,7 +75,8 @@ const githubUrl = 'https://github.com/needmoneyfor911';
 		</p>
 	</section>
 
-	<section class="mx-auto max-w-4xl px-6 py-16 border-t border-slate-800">
+	<div class="band border-t border-slate-800">
+	<section class="mx-auto max-w-4xl px-6 py-20">
 		<div class="flex items-center justify-between mb-6">
 			<h2 class="text-2xl font-semibold">Featured Projects</h2>
 			<a href="/projects" class="text-sm text-electric hover:text-cantaloupe">View all &rarr;</a>
@@ -96,4 +99,5 @@ const githubUrl = 'https://github.com/needmoneyfor911';
 			)}
 		</div>
 	</section>
+	</div>
 </Layout>
