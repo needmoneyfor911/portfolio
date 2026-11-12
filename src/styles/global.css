@@ -1,30 +1,30 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Palette: near-black neutral, cool-grey text, one light-blue accent.
+/* Palette: deep navy, off-white text, one light-blue accent.
    Restraint is the point -- the accent only appears on focus rings, card
    hover borders and the faint hero glow, so it still means something when it
    shows up. Tailwind (build time, Node) turns each --color-* token into
    utility classes: bg-midnight, text-electric, border-slate-800, etc.
    The token names are left over from earlier palettes: "midnight" is now the
-   near-black page colour, "electric" is the light-blue accent and
+   deep navy page colour, "electric" is the light-blue accent and
    "cantaloupe" its lighter hover shade. */
 @theme {
-	--color-midnight: #0a0a0b;
-	--color-surface: #121214;
+	--color-midnight: #081838;
+	--color-surface: #0f2552;
 	--color-electric: #8fd0ff;
 	--color-cantaloupe: #bfe5ff;
 
-	/* Override the slate shades the site uses with a neutral, very slightly
+	/* Override the slate shades the site uses with a blue-tinted,
 	   cool grey scale so the existing text-slate-* / border-slate-* classes
-	   read well on near-black. slate-400 on #0a0a0b is about 6:1 contrast. */
-	--color-slate-100: #f5f5f7;
-	--color-slate-200: #e2e2e8;
-	--color-slate-300: #c2c2cc;
-	--color-slate-400: #8f8f9b;
-	--color-slate-600: #4a4a55;
-	--color-slate-700: #34343c;
-	--color-slate-800: #232328;
+	   read well on deep navy. slate-400 on #081838 is about 6:1 contrast. */
+	--color-slate-100: #f5f8ff;
+	--color-slate-200: #e1e9fb;
+	--color-slate-300: #bccbea;
+	--color-slate-400: #9aabd0;
+	--color-slate-600: #4a5c8a;
+	--color-slate-700: #33426b;
+	--color-slate-800: #223059;
 
 	--font-sans: 'Inter', ui-sans-serif, system-ui, 'Helvetica Neue', Arial, sans-serif;
 	--font-display: 'Inter', ui-sans-serif, system-ui, 'Helvetica Neue', Arial, sans-serif;
@@ -43,47 +43,18 @@
 	--duration-slow: 400ms;
 }
 
-/* Page background: a soft colour mesh pinned to the viewport on every page.
-   Each glow is a radial gradient parked at an edge or corner, i.e. in the
-   margins around the centred content column rather than behind the text.
-   Runs in the browser as plain CSS and is static, so there is nothing to
-   reduce for prefers-reduced-motion. z-index -1 puts it behind all content,
-   and pointer-events: none means it can never block a click. */
-body::before {
-	content: '';
-	position: fixed;
-	inset: 0;
-	z-index: -1;
-	pointer-events: none;
-	background:
-		radial-gradient(40% 45% at 0% 8%, rgba(50, 130, 220,0.28), transparent 70%),
-		radial-gradient(38% 42% at 100% 30%, rgba(50, 130, 220,0.2), transparent 70%),
-		radial-gradient(45% 40% at 5% 100%, rgba(50, 130, 220,0.14), transparent 70%);
-}
-
-/* Silk streaks: thin, unevenly spaced arcs that read as curved light on
-   satin. The circle is centred off-screen at the bottom-left, and a mask
-   keeps the streaks to that corner so they fade out well before the
-   centred content column. */
-body::after {
-	content: '';
-	position: fixed;
-	inset: 0;
-	z-index: -1;
-	pointer-events: none;
-	background: repeating-radial-gradient(
-		circle at -8% 108%,
-		transparent 0,
-		transparent 46px,
-		rgba(255, 255, 255, 0.09) 47px,
-		transparent 50px,
-		transparent 74px,
-		rgba(255, 255, 255, 0.05) 75px,
-		transparent 77px,
-		transparent 118px
-	);
-	-webkit-mask-image: radial-gradient(ellipse 55% 60% at 0% 100%, #000 0%, transparent 70%);
-	mask-image: radial-gradient(ellipse 55% 60% at 0% 100%, #000 0%, transparent 70%);
+/* Top-of-page glow: two blue radial gradients painted on <body> itself, sized
+   to the top 900px and not repeated. Because it is an ordinary (scrolling)
+   background -- no position: fixed, no mask-image, no extra layers -- it
+   behaves the same on iOS Safari as anywhere else. The glow fades out well
+   above the headline, so text sits on plain navy. Browser-side plain CSS;
+   Tailwind's bg-midnight on <body> supplies the colour underneath. */
+body {
+	background-image:
+		radial-gradient(ellipse 70% 60% at 0% 0%, rgba(40, 120, 255, 0.55), transparent 70%),
+		radial-gradient(ellipse 60% 50% at 100% 0%, rgba(110, 190, 255, 0.35), transparent 70%);
+	background-size: 100% 900px;
+	background-repeat: no-repeat;
 }
 
 /* Headings: semi-bold with tight tracking, so large type reads as one solid
@@ -139,7 +110,7 @@ h3 {
 	position: sticky;
 	top: 0;
 	z-index: 50;
-	background: rgba(10, 10, 11, 0.75);
+	background: rgba(8, 24, 56, 0.8);
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -176,59 +147,15 @@ h3 {
 	}
 }
 
-/* Layered mesh glow behind the home hero: three overlapping indigo glows
-   along the top edge (one hue, so the site stays a three-colour palette:
-   near-black, light blue, off-white). The strongest colour sits on the top edge
-   and fades out before the headline block, so the text stays on dark. Only
-   index.astro uses it. Every gradient fades to transparent before reaching
-   the box's edges, so there is no visible line where the glow ends. */
-.hero-glow {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 900px;
-	z-index: -1;
-	pointer-events: none;
-	background:
-		radial-gradient(ellipse 45% 40% at 98% 4%, rgba(50, 130, 220,0.3), transparent 70%),
-		radial-gradient(ellipse 50% 45% at 45% -4%, rgba(50, 130, 220,0.34), transparent 70%),
-		radial-gradient(ellipse 55% 50% at 0% 2%, rgba(50, 130, 220,0.5), transparent 70%);
-}
-
-/* Silk streaks across the top-right of the hero, over the glow. The
-   mask confines them to that corner, away from the headline on the left. */
-.hero-glow::after {
-	content: '';
-	position: absolute;
-	inset: 0;
-	background: repeating-radial-gradient(
-		circle at 108% -12%,
-		transparent 0,
-		transparent 40px,
-		rgba(255, 255, 255, 0.12) 41px,
-		transparent 45px,
-		transparent 66px,
-		rgba(255, 255, 255, 0.06) 67px,
-		transparent 69px,
-		transparent 104px
-	);
-	-webkit-mask-image: radial-gradient(ellipse 60% 55% at 100% 0%, #000 0%, transparent 70%);
-	mask-image: radial-gradient(ellipse 60% 55% at 100% 0%, #000 0%, transparent 70%);
-}
-
-/* Full-width panel in the style of a stacked section: a deep navy mesh (the
-   same light-blue hue, darkened) with rounded top corners, so it reads as a
-   sheet sliding over the page. It is kept dark enough that light-grey text
-   stays above 4.5:1 contrast.
+/* Full-width panel in the style of a stacked section: a vivid blue sheet
+   fading diagonally into the page navy, with rounded top corners so it reads
+   as sliding over the page. A normal element background, so it scrolls with
+   the page. Stops are dark enough that light text stays above 4.5:1.
    Wrap a section in it (see index.astro) so the section's contents stay in
    the normal centred column. */
 .band {
-	background:
-		radial-gradient(ellipse 55% 70% at 100% 0%, rgba(50, 130, 220,0.4), transparent 70%),
-		radial-gradient(ellipse 50% 60% at 0% 100%, rgba(50, 130, 220,0.28), transparent 70%),
-		linear-gradient(180deg, #0b1a2e, #0a0f18);
-	border-top: 1px solid rgba(255, 255, 255, 0.12);
+	background: linear-gradient(135deg, #15409f 0%, #0e2a6b 55%, var(--color-midnight) 100%);
+	border-top: 1px solid rgba(255, 255, 255, 0.14);
 	border-radius: 2rem 2rem 0 0;
 }
 
